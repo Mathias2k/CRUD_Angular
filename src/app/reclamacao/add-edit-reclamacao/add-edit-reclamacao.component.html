@@ -1,0 +1,104 @@
+<!-- <form ngNativeValidate> -->
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="cliente">Cliente</label>
+      <input type="text" pattern="[A-Za-z].{1,}" maxlength="50" minlength="3" class="form-control" id="cliente" required [(ngModel)]="cliente" name="cliente">
+      <div *ngIf="!heroForm.controls['cliente'].valid && heroForm.controls['cliente'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="telefoneCliente">Telefone Cliente</label>
+      <input type="text" placeholder="(99) 99999-9999" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})" class="form-control" id="telefoneCliente" required [(ngModel)]="telefoneCliente" name="telefoneCliente">
+      <div *ngIf="!heroForm.controls['telefoneCliente'].valid && heroForm.controls['telefoneCliente'].touched" class="alert alert-danger">
+        Preencha esse campo com o formato (99) 99999-9999
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="reclamante">Reclamante</label>
+      <input type="text" pattern="[A-Za-z].{1,}" maxlength="50" minlength="3" class="form-control" id="reclamante" required [(ngModel)]="reclamante" name="reclamante">
+      <div *ngIf="!heroForm.controls['reclamante'].valid && heroForm.controls['reclamante'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="telefoneReclamante">Telefone Reclamante</label>
+      <input type="text" placeholder="(99) 99999-9999" pattern="(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})" class="form-control" id="telefoneReclamante" required [(ngModel)]="telefoneReclamante" name="telefoneReclamante">
+      <div *ngIf="!heroForm.controls['telefoneReclamante'].valid && heroForm.controls['telefoneReclamante'].touched" class="alert alert-danger">
+        Preencha esse campo com o formato (99) 99999-9999
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="nomeDoReclamado">Nome do Reclamado</label>
+      <input type="text" pattern="[A-Za-z].{1,}" maxlength="50" minlength="3" class="form-control" id="nomeDoReclamado" required [(ngModel)]="nomeDoReclamado" name="nomeDoReclamado">
+      <div *ngIf="!heroForm.controls['nomeDoReclamado'].valid && heroForm.controls['nomeDoReclamado'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="areaDoReclamado">Área do Reclamado</label>
+      <input type="text" pattern="[A-Za-z].{1,}" maxlength="50" minlength="3" class="form-control" id="areaDoReclamado" required [(ngModel)]="areaDoReclamado" name="areaDoReclamado">
+      <div *ngIf="!heroForm.controls['areaDoReclamado'].valid && heroForm.controls['areaDoReclamado'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input type="text" pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})" placeholder="pontuação opcional" class="form-control" id="cpf" required [(ngModel)]="cpf" name="cpf">
+      <div *ngIf="!heroForm.controls['cpf'].valid && heroForm.controls['cpf'].touched" class="alert alert-danger">
+        Preencha esse campo no formato xxx.xxx.xxx-xx ou sem pontuação
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="criadoPor">Criado Por &nbsp;</label>
+      <input type="text" pattern="[A-Za-z].{1,}" maxlength="50" minlength="3"  class="form-control" id="criadoPor" required [(ngModel)]="criadoPor" name="criadoPor">
+      <div *ngIf="!heroForm.controls['criadoPor'].valid && heroForm.controls['criadoPor'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="criadoEm">Criado Em: &nbsp;</label>
+      <p>{{today | date:'dd-MM-yyyy hh:mm:ss a'}}</p> 
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <div class="form-group">
+      <label for="loja">Loja</label>
+      <input type="text" pattern="[A-Za-z].{1,}" class="form-control" id="loja" required [(ngModel)]="loja" name="loja">
+      <div *ngIf="!heroForm.controls['loja'].valid && heroForm.controls['loja'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <label for="descricao" class="form-label">Descrição</label>
+    <textarea minlength="5" maxlength="300" placeholder="Detalhar a alegação do reclamante" class="form-control" id="exampleFormControlTextarea1" rows="3" required [(ngModel)]="descricao"
+      name="descricao"></textarea>
+      <div *ngIf="!heroForm.controls['descricao'].valid && heroForm.controls['descricao'].touched" class="alert alert-danger">
+        Preencha esse campo
+      </div>
+  </div>
+  <button [disabled]="!heroForm.form.valid" (click)="addReclamacao()" *ngIf="reclamacao.id==0" class="btn btn-primary">
+    Adicionar
+  </button>
+  <button [disabled]="!heroForm.form.valid" (click)="updateReclamacao()" *ngIf="reclamacao.id!=0" class="btn btn-primary">
+    Atualizar
+  </button>
+</form>
